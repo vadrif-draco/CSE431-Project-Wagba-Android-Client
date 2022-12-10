@@ -16,7 +16,7 @@
             android:name=".PersonalEmailLoginActivity"
             android:exported="false"
             android:theme="@style/Theme.Wagba"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -25,7 +25,7 @@
             android:name=".FacultyEmailLoginActivity"
             android:exported="false"
             android:theme="@style/Theme.Wagba"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
