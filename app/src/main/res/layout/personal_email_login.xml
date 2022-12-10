@@ -6,14 +6,14 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/night_accent_complementary50"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".PersonalEmailLoginActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/night_accent_complementary50"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,8 +22,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="48dp">
 
             <TextView
                 android:id="@+id/emailLabel"
@@ -103,6 +103,43 @@
                     android:gravity="center"
                     android:text="@string/registerHyperlinkText"
                     android:textColor="@color/night_accent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@color/night_accent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:id="@+id/testPrompt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="4dp"
+                    android:text="For testing, use the following email-password pair:"
+                    android:textColor="@color/night_accent_complementary"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/testEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="admin"
+                    android:textColor="@color/night_accent_complementary50" />
+
+                <TextView
+                    android:id="@+id/testPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="admin"
+                    android:textColor="@color/night_accent_complementary50" />
+
             </LinearLayout>
 
         </LinearLayout>

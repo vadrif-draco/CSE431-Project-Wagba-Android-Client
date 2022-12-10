@@ -6,14 +6,14 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/night_accent_complementary50"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".FacultyEmailLoginActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/night_accent_complementary50"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,8 +22,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="48dp">
 
             <TextView
                 android:id="@+id/emailLabel"
@@ -52,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="48dp"
+                android:layout_marginBottom="48dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:paddingVertical="8dp"
                 android:text="@string/loginBtnText"
