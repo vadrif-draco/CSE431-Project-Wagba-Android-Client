@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Wagba</string>
+    <string name="entry_background">Background for Entry Sceen</string>
+    <string name="facultyEmailPrompt">Login with Faculty Email</string>
+    <string name="personalEmailPrompt">Login with Personal Email</string>
+    <string name="emailLabel">Email</string>
+    <string name="passwordLabel">Password</string>
+    <string name="loginBtnText">Login</string>
 </resources>

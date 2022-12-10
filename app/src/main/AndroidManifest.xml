@@ -13,8 +13,27 @@
         android:theme="@style/Theme.Wagba"
         tools:targetApi="31">
         <activity
+            android:name=".PersonalEmailLoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Wagba"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".FacultyEmailLoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Wagba"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Wagba">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

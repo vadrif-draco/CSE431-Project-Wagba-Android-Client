@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="night_primary">#355E92</color>
+    <color name="night_primary_complementary">#E0E2DB</color>
+    <color name="night_accent">#E6AF2E</color>
+    <color name="night_accent_complementary">#191716</color>
+    <color name="night_accent_complementary50">#80191716</color>
+    <!-- TODO: Light theme -->
+    <color name="notnight_primary">#355E92</color>
+    <color name="notnight_primary_complementary">#E0E2DB</color>
+    <color name="notnight_accent">#E6AF2E</color>
+    <color name="notnight_accent_complementary">#191716</color>
 </resources>
