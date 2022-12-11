@@ -8,4 +8,11 @@
     <string name="loginBtnText">Login</string>
     <string name="registerHyperlinkText"><u>Register now!</u></string>
     <string name="registerPromptText">Don\'t have an account yet?</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="eat_prompt">Where would you like to order from today?</string>
+    <string name="restaurantPictureDesc">Picture of restaurant</string>
+    <string name="dishes">Dishes</string>
+    <string name="order_prompt">What would you like to order?</string>
+    <string name="dishPictureDesc">Picture of dish</string>
+    <string name="profile_page_trigger_icon">Profile Page Trigger Icon</string>
 </resources>

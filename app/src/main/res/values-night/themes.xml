@@ -7,7 +7,7 @@
 
         <item name="colorSecondary">@color/night_accent</item>
         <item name="colorSecondaryVariant">@color/night_accent</item>
-        <item name="colorOnSecondary">@color/night_accent_complementary</item>
+        <item name="colorOnSecondary">@color/night_accent_complementary100</item>
 
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>

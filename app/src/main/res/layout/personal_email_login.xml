@@ -121,7 +121,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="4dp"
                     android:text="For testing, use the following email-password pair:"
-                    android:textColor="@color/night_accent_complementary"
+                    android:textColor="@color/night_accent_complementary100"
                     android:textStyle="italic" />
 
                 <TextView
