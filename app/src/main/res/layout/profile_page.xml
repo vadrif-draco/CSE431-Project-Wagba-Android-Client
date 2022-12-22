@@ -5,7 +5,7 @@
     android:background="@color/night_accent_complementary25"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfilePageActivity">
+    tools:context=".activities.ProfilePageActivity">
 
     <TextView
         android:id="@+id/welcomeTV"

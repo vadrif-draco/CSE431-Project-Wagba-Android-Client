@@ -1,4 +1,4 @@
-package asu.foe.wagba8805;
+package asu.foe.wagba8805.activities;
 
 import android.content.Intent;
 import android.content.res.Configuration;

@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import asu.foe.wagba8805.DishesActivity;
 import asu.foe.wagba8805.R;
+import asu.foe.wagba8805.activities.DishesActivity;
 import asu.foe.wagba8805.databinding.RestaurantsItemBinding;
 import asu.foe.wagba8805.pojos.RestaurantsItem;
 

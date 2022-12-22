@@ -1,8 +1,10 @@
-package asu.foe.wagba8805;
+package asu.foe.wagba8805.activities;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import asu.foe.wagba8805.R;
 
 public class FacultyEmailLoginActivity extends AppCompatActivity {
 

@@ -9,7 +9,7 @@
     android:background="@color/night_accent_complementary50"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".FacultyEmailLoginActivity">
+    tools:context=".activities.FacultyEmailLoginActivity">
 
     <ScrollView
         android:layout_width="match_parent"

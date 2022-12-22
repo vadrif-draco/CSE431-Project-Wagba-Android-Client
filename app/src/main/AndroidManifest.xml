@@ -15,28 +15,28 @@
         android:theme="@style/Theme.Wagba"
         tools:targetApi="31">
         <activity
-            android:name=".ProfilePageActivity"
+            android:name=".activities.ProfilePageActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".DishesActivity"
+            android:name=".activities.DishesActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".RestaurantsActivity"
+            android:name=".activities.RestaurantsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".PersonalEmailLoginActivity"
+            android:name=".activities.PersonalEmailLoginActivity"
             android:exported="false"
             android:theme="@style/Theme.Wagba"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
@@ -45,7 +45,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".FacultyEmailLoginActivity"
+            android:name=".activities.FacultyEmailLoginActivity"
             android:exported="false"
             android:theme="@style/Theme.Wagba"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">

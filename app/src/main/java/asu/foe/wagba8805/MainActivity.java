@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import asu.foe.wagba8805.activities.FacultyEmailLoginActivity;
+import asu.foe.wagba8805.activities.PersonalEmailLoginActivity;
 import asu.foe.wagba8805.databinding.EntryBinding;
 
 public class MainActivity extends AppCompatActivity {
