@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Wagba"
         tools:targetApi="31">
         <activity
-            android:name=".GmailLoginActivity"
+            android:name=".activities.GmailLoginActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

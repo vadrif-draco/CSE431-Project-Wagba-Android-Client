@@ -3,6 +3,7 @@ package asu.foe.wagba8805.services;
 import static asu.foe.wagba8805.Constants.TAG;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.android.gms.tasks.Task;
@@ -11,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.OAuthCredential;
 import com.google.firebase.auth.OAuthProvider;
 
+import asu.foe.wagba8805.MainActivity;
 import asu.foe.wagba8805.interfaces.AuthResponsiveActivity;
 
 public class AuthService {
@@ -23,6 +25,10 @@ public class AuthService {
     authResult.getAdditionalUserInfo().getProfile(); // IdP data
     accessToken = ((OAuthCredential) authResult.getCredential()).getAccessToken(); // OAuth access token
     idToken = ((OAuthCredential) authResult.getCredential()).getIdToken(); // OAuth ID token
+    SharedPreferences.Editor sharedPrefsEditor = MainActivity.sharedPrefs.edit();
+    sharedPrefsEditor.putString("accessToken", accessToken);
+    sharedPrefsEditor.putString("idToken", idToken);
+    sharedPrefsEditor.apply();
     activity.respondToAuth(true);
   }
 

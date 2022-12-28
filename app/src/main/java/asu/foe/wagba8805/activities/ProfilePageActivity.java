@@ -1,8 +1,11 @@
 package asu.foe.wagba8805.activities;
 
+import static asu.foe.wagba8805.Constants.TAG;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,6 +42,7 @@ public class ProfilePageActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     if (user != null) {
       ppBinding.username.setText(user.getDisplayName());
+      Log.d(TAG, user.getProviderData().get(1).getProviderId());
 
       // FIXME: This is a little hacky... Microsoft provider returns null on getPhotoUrl
       // So here I check on that and manually retrieve the picture using their Graph API

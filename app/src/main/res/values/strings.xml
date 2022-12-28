@@ -19,4 +19,6 @@
     <string name="sign_out_btn">Sign Out</string>
     <string name="gmailPrompt">Login with Google (Gmail)</string>
     <string name="gmail_prompt">Sit tight, taking you to Google...</string>
+    <string name="welcome_prompt">Welcome!</string>
+    <string name="username_placeholder">John Doe</string>
 </resources>
