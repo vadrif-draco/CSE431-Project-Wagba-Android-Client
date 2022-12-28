@@ -1,25 +1,21 @@
 package asu.foe.wagba8805.activities;
 
-import static asu.foe.wagba8805.Constants.TAG;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.GlideUrl;
-import com.bumptech.glide.load.model.LazyHeaders;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 
 import asu.foe.wagba8805.MainActivity;
 import asu.foe.wagba8805.R;
 import asu.foe.wagba8805.databinding.ProfilePageBinding;
 import asu.foe.wagba8805.services.AuthService;
+import asu.foe.wagba8805.services.ProfileService;
 
 public class ProfilePageActivity extends AppCompatActivity {
 
@@ -40,26 +36,18 @@ public class ProfilePageActivity extends AppCompatActivity {
     });
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    UserInfo userInfo;
     if (user != null) {
-      ppBinding.username.setText(user.getDisplayName());
-      Log.d(TAG, user.getProviderData().get(1).getProviderId());
-
-      // FIXME: This is a little hacky... Microsoft provider returns null on getPhotoUrl
-      // So here I check on that and manually retrieve the picture using their Graph API
-      // The hacky part is that check, as well as the get(1) part...
-      Uri photoUrl = user.getPhotoUrl();
-      GlideUrl glidePhotoUrl;
-      if (photoUrl != null) {
-        glidePhotoUrl = new GlideUrl(String.valueOf(photoUrl));
+      if (user.getProviderData().size() > 0) {
+        // 1 stands for the actual provider after firebase, in our case google.com and microsoft.com
+        userInfo = user.getProviderData().get(1);
       } else {
-        glidePhotoUrl =
-            new GlideUrl(
-                "https://graph.microsoft.com/v1.0/users/" + user.getProviderData().get(1).getUid() + "/photo/$value",
-                new LazyHeaders.Builder().addHeader("Authorization", AuthService.accessToken).build()
-            );
+        // 0 stands for firebase itself
+        userInfo = user.getProviderData().get(0);
       }
+      ppBinding.username.setText(ProfileService.getDisplayName(userInfo));
       Glide.with(this)
-          .load(glidePhotoUrl)
+          .load(ProfileService.getGlideUrl(userInfo))
           .thumbnail(Glide.with(this).load(R.drawable.user_placeholder))
           .centerCrop()
           .apply(RequestOptions.circleCropTransform())

@@ -13,8 +13,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.google.firebase.auth.OAuthProvider;
-
 import asu.foe.wagba8805.databinding.GmailLoginBinding;
 import asu.foe.wagba8805.interfaces.AuthResponsiveActivity;
 
@@ -36,8 +34,7 @@ public class GmailLoginActivity extends AppCompatActivity implements AuthRespons
         Intent intent = new Intent("toMainActivity");
         intent.putExtra("message", DISABLE_LOGIN_BUTTONS);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-        OAuthProvider.Builder provider = OAuthProvider.newBuilder("google.com");
-        login(GmailLoginActivity.this, provider);
+        login(GmailLoginActivity.this);
       }
     }, 2000); // Delaying for two seconds for UX purposes
   }
