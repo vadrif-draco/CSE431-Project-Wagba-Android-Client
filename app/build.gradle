@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services' // Google Services for Firebase SDK
 }
 
 android {
@@ -28,6 +29,12 @@ android {
 }
 
 dependencies {
+    // Firebase BoM (By using the BoM, your app will always use compatible versions of Firebase Android libraries.)
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
+
+    // Firebase Auth (When using the BoM, you don't specify versions in Firebase library dependencies)
+    implementation 'com.google.firebase:firebase-auth'
+
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'

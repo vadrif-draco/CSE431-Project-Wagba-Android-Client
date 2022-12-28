@@ -2,11 +2,17 @@
 <resources>
     <color name="night_primary">#355E92</color>
     <color name="night_primary_complementary">#E0E2DB</color>
+    <color name="night_accent25">#40E6AF2E</color>
+    <color name="night_accent50">#80E6AF2E</color>
+    <color name="night_accent75">#C0E6AF2E</color>
+    <color name="night_accent100">#FFE6AF2E</color>
     <color name="night_accent">#E6AF2E</color>
     <color name="night_accent_complementary25">#40191716</color>
     <color name="night_accent_complementary50">#80191716</color>
     <color name="night_accent_complementary75">#C0191716</color>
     <color name="night_accent_complementary100">#FF191716</color>
+    <color name="night_accent_complementary">#191716</color>
+    <color name="faculty_blue">#06609F</color>
     <!-- TODO: Light theme -->
     <color name="notnight_primary">#355E92</color>
     <color name="notnight_primary_complementary">#E0E2DB</color>

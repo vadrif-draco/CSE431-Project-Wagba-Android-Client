@@ -49,7 +49,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/facultyEmailLoginBtn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="64dp"
                 android:layout_marginHorizontal="32dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:paddingVertical="8dp"
@@ -61,9 +61,23 @@
                 app:iconTint="@color/night_primary" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/gmailLoginBtn"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginHorizontal="32dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:paddingVertical="8dp"
+                android:text="@string/gmailPrompt"
+                android:textColor="@color/night_primary"
+                app:backgroundTint="@color/night_primary_complementary"
+                app:icon="@drawable/google__g__logo"
+                app:iconSize="32dp"
+                app:iconTint="@color/night_primary" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/personalEmailLoginBtn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="64dp"
                 android:layout_marginHorizontal="32dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:paddingVertical="8dp"

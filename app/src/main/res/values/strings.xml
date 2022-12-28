@@ -15,4 +15,8 @@
     <string name="order_prompt">What would you like to order?</string>
     <string name="dishPictureDesc">Picture of dish</string>
     <string name="profile_page_trigger_icon">Profile Page Trigger Icon</string>
+    <string name="portal_prompt">Sit tight, taking you to portal login…</string>
+    <string name="sign_out_btn">Sign Out</string>
+    <string name="gmailPrompt">Login with Google (Gmail)</string>
+    <string name="gmail_prompt">Sit tight, taking you to Google...</string>
 </resources>
