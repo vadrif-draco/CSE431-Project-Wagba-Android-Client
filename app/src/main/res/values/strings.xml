@@ -6,6 +6,7 @@
     <string name="emailLabel">\u00A0Email</string>
     <string name="passwordLabel">\u00A0Password</string>
     <string name="loginBtnText">Login</string>
+    <string name="loginBtnPleaseWaitText">Please wait…</string>
     <string name="registerHyperlinkText"><u>Register now!</u></string>
     <string name="registerPromptText">Don\'t have an account yet?</string>
     <string name="restaurants">Restaurants</string>
@@ -18,7 +19,10 @@
     <string name="portal_prompt">Sit tight, taking you to portal login…</string>
     <string name="sign_out_btn">Sign Out</string>
     <string name="gmailPrompt">Login with Google (Gmail)</string>
-    <string name="gmail_prompt">Sit tight, taking you to Google...</string>
+    <string name="gmail_prompt">Sit tight, taking you to Google…</string>
     <string name="welcome_prompt">Welcome!</string>
     <string name="username_placeholder">John Doe</string>
+    <string name="testingInsertPrompt">For testing, insert the following into the email field:</string>
+    <string name="testingEntranceKeyword">admin</string>
+    <string name="checkEmailPrompt">Please check your email:</string>
 </resources>

@@ -15,6 +15,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import asu.foe.wagba8805.databinding.FacultyEmailLoginBinding;
 import asu.foe.wagba8805.interfaces.AuthResponsiveActivity;
+import asu.foe.wagba8805.services.AuthService;
 
 public class FacultyEmailLoginActivity extends AppCompatActivity implements AuthResponsiveActivity {
 
@@ -60,7 +61,7 @@ public class FacultyEmailLoginActivity extends AppCompatActivity implements Auth
 
       intent.putExtra("message", ENABLE_LOGIN_BUTTONS);
       LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-      Toast.makeText(this, "Sign-in cancelled/failed...", Toast.LENGTH_SHORT).show();
+      Toast.makeText(this, "Sign-in failed; " + AuthService.error, Toast.LENGTH_LONG).show();
 
     }
     finish();

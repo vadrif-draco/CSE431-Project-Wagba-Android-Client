@@ -15,6 +15,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import asu.foe.wagba8805.databinding.GmailLoginBinding;
 import asu.foe.wagba8805.interfaces.AuthResponsiveActivity;
+import asu.foe.wagba8805.services.AuthService;
 
 public class GmailLoginActivity extends AppCompatActivity implements AuthResponsiveActivity {
 
@@ -59,7 +60,7 @@ public class GmailLoginActivity extends AppCompatActivity implements AuthRespons
 
       intent.putExtra("message", ENABLE_LOGIN_BUTTONS);
       LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-      Toast.makeText(this, "Sign-in cancelled/failed...", Toast.LENGTH_SHORT).show();
+      Toast.makeText(this, "Sign-in failed; " + AuthService.error, Toast.LENGTH_LONG).show();
 
     }
     finish();

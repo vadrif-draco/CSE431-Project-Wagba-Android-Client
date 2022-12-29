@@ -47,28 +47,6 @@
                 android:textColor="@color/night_accent"
                 tools:ignore="SpeakableTextPresentCheck" />
 
-            <TextView
-                android:id="@+id/passwordLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="48dp"
-                android:text="@string/passwordLabel"
-                android:textColor="@color/night_primary_complementary" />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/passwordInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="48dp"
-                android:layout_marginBottom="48dp"
-                android:backgroundTint="@color/night_primary_complementary"
-                android:ems="10"
-                android:hint=""
-                android:inputType="textPassword"
-                android:minHeight="48dp"
-                android:textColor="@color/night_accent"
-                tools:ignore="SpeakableTextPresentCheck" />
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/loginBtn"
                 android:layout_width="match_parent"
@@ -120,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="4dp"
-                    android:text="For testing, use the following email-password pair:"
+                    android:text="@string/testingInsertPrompt"
                     android:textColor="@color/night_accent_complementary100"
                     android:textStyle="italic" />
 
@@ -129,15 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="admin"
-                    android:textColor="@color/night_accent_complementary50" />
-
-                <TextView
-                    android:id="@+id/testPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="admin"
+                    android:text="@string/testingEntranceKeyword"
                     android:textColor="@color/night_accent_complementary50" />
 
             </LinearLayout>
