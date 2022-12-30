@@ -25,6 +25,7 @@ public class FirebaseProfileService {
 
   @Nullable
   public static String getUuid() {
+    if (FirebaseAuthService.admin) return "1";
     UserInfo userInfo = getUserInfo();
     return (userInfo == null) ? null : userInfo.getUid();
   }
@@ -36,7 +37,7 @@ public class FirebaseProfileService {
   }
 
   @Nullable
-  public static Uri getPhotoUri() {
+  private static Uri getPhotoUri() {
     UserInfo userInfo = getUserInfo();
     return (userInfo == null) ? null : userInfo.getPhotoUrl();
   }

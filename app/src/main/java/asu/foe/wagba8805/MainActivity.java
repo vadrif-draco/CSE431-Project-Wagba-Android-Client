@@ -14,15 +14,22 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.List;
 
 import asu.foe.wagba8805.activities.FacultyEmailLoginActivity;
 import asu.foe.wagba8805.activities.GmailLoginActivity;
 import asu.foe.wagba8805.activities.PersonalEmailLoginActivity;
 import asu.foe.wagba8805.activities.RestaurantsActivity;
 import asu.foe.wagba8805.databinding.EntryBinding;
+import asu.foe.wagba8805.pojos.User;
+import asu.foe.wagba8805.viewmodels.UserViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -101,6 +108,26 @@ public class MainActivity extends AppCompatActivity {
       entryBinding.rootLayout.setColumnCount(1);
 
     }
+
+    User admin_user = new User(
+        "1",
+        "admin",
+        "Administrator",
+        "https://i.kym-cdn.com/entries/icons/facebook/000/021/290/bounsa.jpg",
+        true);
+
+    UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+    LiveData<List<User>> ld_l_user = userViewModel.getUserByUUID("1");
+    Observer<List<User>> observer = new Observer<List<User>>() {
+      @Override
+      public void onChanged(List<User> users) {
+        if (users.size() == 0) {
+          userViewModel.updateUserData(admin_user);
+          ld_l_user.removeObserver(this);
+        }
+      }
+    };
+    ld_l_user.observeForever(observer);
 
   }
 

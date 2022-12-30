@@ -29,6 +29,12 @@ android {
 }
 
 dependencies {
+
+    // Some basic essentials...
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
     // Firebase BoM (By using the BoM, your app will always use compatible versions of Firebase Android libraries.)
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
 
@@ -39,10 +45,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-dynamic-links'
     implementation 'com.google.firebase:firebase-analytics'
 
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.7.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
@@ -51,4 +53,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    // Room components
+    implementation "androidx.room:room-runtime:2.4.3"
+    annotationProcessor "androidx.room:room-compiler:2.4.3"
+
+    // Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.5.1"
+
 }

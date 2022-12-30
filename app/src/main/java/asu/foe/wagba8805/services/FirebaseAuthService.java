@@ -27,10 +27,13 @@ import asu.foe.wagba8805.activities.GmailLoginActivity;
 import asu.foe.wagba8805.activities.PersonalEmailLoginActivity;
 import asu.foe.wagba8805.activities.PersonalEmailLoginBridgeActivity;
 import asu.foe.wagba8805.interfaces.AuthResponsiveActivity;
+import asu.foe.wagba8805.pojos.User;
+import asu.foe.wagba8805.repositories.UserRepository;
 
 public class FirebaseAuthService {
 
   private static String error = "undefined error";
+  public static boolean admin = false;
 
   // User signed in successfully.
   private static void respondToSuccess(@Nullable AuthResult authResult, AuthResponsiveActivity activity) {
@@ -40,6 +43,20 @@ public class FirebaseAuthService {
       sharedPrefsEditor.putString("idToken", ((OAuthCredential) authResult.getCredential()).getIdToken());
       sharedPrefsEditor.putString("provider", authResult.getCredential().getProvider());
       sharedPrefsEditor.apply();
+
+      if (FirebaseProfileService.getUuid() != null &&
+          authResult.getAdditionalUserInfo() != null &&
+          authResult.getAdditionalUserInfo().isNewUser()) {
+        User user = new User(
+            FirebaseProfileService.getUuid(),
+            FirebaseProfileService.getEmail(),
+            FirebaseProfileService.getDisplayName(),
+            FirebaseProfileService.getGlideUrl() == null ? null : FirebaseProfileService.getGlideUrl().toStringUrl(),
+            null
+        );
+        UserRepository userRepo = new UserRepository(((Activity) activity).getApplication());
+        userRepo.insert(user);
+      }
     }
     activity.respondToAuth(true);
   }
@@ -199,8 +216,9 @@ public class FirebaseAuthService {
 
                 if (email != null && !email.isEmpty()) {
 
+                  // TODO: Use the salt and email stored and hash and compare them yourself before using the following
+
                   // The client SDK will parse the code from the link
-                  // TODO: If this doesn't work, use the salt and email stored and hash and compare them yourself
                   FirebaseAuth.getInstance().signInWithEmailLink(email, emailLink)
                       .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -229,6 +247,7 @@ public class FirebaseAuthService {
   }
 
   public static void signOut() {
+    admin = false;
     clearFirebaseAuthServiceSharedPrefs();
     FirebaseAuth.getInstance().signOut();
   }

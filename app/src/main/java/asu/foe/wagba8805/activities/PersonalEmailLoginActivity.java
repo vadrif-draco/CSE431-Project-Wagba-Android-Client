@@ -59,9 +59,9 @@ public class PersonalEmailLoginActivity extends AppCompatActivity implements Aut
     pelBinding.loginBtn.setOnClickListener(v -> {
       if (Objects.requireNonNull(pelBinding.emailInput.getText()).toString().equals("admin")) {
 
+        FirebaseAuthService.admin = true;
         startActivity(new Intent(this, RestaurantsActivity.class));
         finishAffinity();
-        // TODO: Make an actual user for the "admin" in RoomDB
 
       } else if (Objects.requireNonNull(pelBinding.emailInput.getText()).toString().isEmpty()) {
 
