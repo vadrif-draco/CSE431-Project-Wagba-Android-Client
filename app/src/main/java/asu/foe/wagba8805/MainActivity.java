@@ -2,7 +2,7 @@ package asu.foe.wagba8805;
 
 import static asu.foe.wagba8805.Constants.DISABLE_LOGIN_BUTTONS;
 import static asu.foe.wagba8805.Constants.ENABLE_LOGIN_BUTTONS;
-import static asu.foe.wagba8805.Constants.FINISH;
+import static asu.foe.wagba8805.Constants.FINISH_YOURSELF;
 import static asu.foe.wagba8805.Constants.SHARED_PREFS;
 
 import android.content.BroadcastReceiver;
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         case DISABLE_LOGIN_BUTTONS:
           disableLoginBtns();
           break;
-        case FINISH:
+        case FINISH_YOURSELF:
           finish();
           break;
         case 0:
@@ -81,17 +81,14 @@ public class MainActivity extends AppCompatActivity {
     entryBinding = EntryBinding.inflate(getLayoutInflater());
     setContentView(entryBinding.getRoot());
 
-    entryBinding.facultyEmailLoginBtn.setOnClickListener(v -> {
-      startActivity(new Intent(this, FacultyEmailLoginActivity.class));
-    });
+    entryBinding.facultyEmailLoginBtn.setOnClickListener(v ->
+        startActivity(new Intent(this, FacultyEmailLoginActivity.class)));
 
-    entryBinding.gmailLoginBtn.setOnClickListener(v -> {
-      startActivity(new Intent(this, GmailLoginActivity.class));
-    });
+    entryBinding.gmailLoginBtn.setOnClickListener(v ->
+        startActivity(new Intent(this, GmailLoginActivity.class)));
 
-    entryBinding.personalEmailLoginBtn.setOnClickListener(v -> {
-      startActivity(new Intent(this, PersonalEmailLoginActivity.class));
-    });
+    entryBinding.personalEmailLoginBtn.setOnClickListener(v ->
+        startActivity(new Intent(this, PersonalEmailLoginActivity.class)));
 
     if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 

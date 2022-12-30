@@ -2,7 +2,7 @@ package asu.foe.wagba8805.activities;
 
 import static asu.foe.wagba8805.Constants.DISABLE_LOGIN_BUTTONS;
 import static asu.foe.wagba8805.Constants.ENABLE_LOGIN_BUTTONS;
-import static asu.foe.wagba8805.Constants.FINISH;
+import static asu.foe.wagba8805.Constants.FINISH_YOURSELF;
 import static asu.foe.wagba8805.services.FirebaseAuthService.login;
 
 import android.content.Intent;
@@ -53,7 +53,7 @@ public class FacultyEmailLoginActivity extends AppCompatActivity implements Auth
     Intent intent = new Intent("toMainActivity");
     if (logged_in) { // Logged in successfully
 
-      intent.putExtra("message", FINISH);
+      intent.putExtra("message", FINISH_YOURSELF);
       LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
       startActivity(new Intent(this, RestaurantsActivity.class)); // Proceed to app
 
