@@ -25,4 +25,9 @@
     <string name="testingInsertPrompt">For testing, insert the following into the email field…</string>
     <string name="testingEntranceKeyword">admin</string>
     <string name="checkEmailPrompt">Please check your email:</string>
+    <string name="savePrompt">Save</string>
+    <string name="uploadPrompt">Upload</string>
+    <string name="uploadingPrompt">Uploading…</string>
+    <string name="browsePrompt">Browse</string>
+    <string name="profileCreationPageTitle">Stylish!</string>
 </resources>

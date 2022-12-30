@@ -7,6 +7,7 @@
     android:background="@color/night_accent_complementary25"
     tools:context=".activities.ProfilePageActivity">
 
+    <!--    Change this to fit with restaurants and dishes pages -->
     <TextView
         android:id="@+id/welcomeTV"
         android:layout_width="0dp"

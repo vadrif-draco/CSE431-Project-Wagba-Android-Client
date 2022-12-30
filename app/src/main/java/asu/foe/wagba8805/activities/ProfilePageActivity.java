@@ -36,6 +36,10 @@ public class ProfilePageActivity extends AppCompatActivity {
       finishAffinity();
     });
 
+    ppBinding.img.setOnClickListener(v -> {
+      startActivity(new Intent(this, ProfileCreationActivity.class));
+    });
+
     // TODO: Place admin as user with uuid 1 in roomDB; insert if not already exists (to simulate persistence)!!
     UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
     userViewModel.getUserByUUID(FirebaseProfileService.getUuid()).observe(this, users -> {
