@@ -3,7 +3,7 @@ package asu.foe.wagba8805.activities;
 import static asu.foe.wagba8805.Constants.DISABLE_LOGIN_BUTTONS;
 import static asu.foe.wagba8805.Constants.ENABLE_LOGIN_BUTTONS;
 import static asu.foe.wagba8805.Constants.FINISH;
-import static asu.foe.wagba8805.services.AuthService.login;
+import static asu.foe.wagba8805.services.FirebaseAuthService.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import asu.foe.wagba8805.databinding.GmailLoginBinding;
 import asu.foe.wagba8805.interfaces.AuthResponsiveActivity;
-import asu.foe.wagba8805.services.AuthService;
+import asu.foe.wagba8805.services.FirebaseAuthService;
 
 public class GmailLoginActivity extends AppCompatActivity implements AuthResponsiveActivity {
 
@@ -60,7 +60,7 @@ public class GmailLoginActivity extends AppCompatActivity implements AuthRespons
 
       intent.putExtra("message", ENABLE_LOGIN_BUTTONS);
       LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-      Toast.makeText(this, "Sign-in failed; " + AuthService.error, Toast.LENGTH_LONG).show();
+      Toast.makeText(this, "Sign-in failed; " + FirebaseAuthService.getCurrentError(), Toast.LENGTH_LONG).show();
 
     }
     finish();

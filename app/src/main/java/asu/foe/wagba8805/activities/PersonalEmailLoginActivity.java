@@ -1,9 +1,12 @@
 package asu.foe.wagba8805.activities;
 
-import static asu.foe.wagba8805.services.AuthService.login;
+import static asu.foe.wagba8805.services.FirebaseAuthService.login;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +16,7 @@ import java.util.Objects;
 import asu.foe.wagba8805.R;
 import asu.foe.wagba8805.databinding.PersonalEmailLoginBinding;
 import asu.foe.wagba8805.interfaces.AuthResponsiveActivity;
-import asu.foe.wagba8805.services.AuthService;
+import asu.foe.wagba8805.services.FirebaseAuthService;
 
 public class PersonalEmailLoginActivity extends AppCompatActivity implements AuthResponsiveActivity {
 
@@ -26,6 +29,32 @@ public class PersonalEmailLoginActivity extends AppCompatActivity implements Aut
 
     pelBinding = PersonalEmailLoginBinding.inflate(getLayoutInflater());
     setContentView(pelBinding.getRoot());
+
+    if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
+      pelBinding.userInputLayout.setRowCount(1);
+      pelBinding.userInputLayout.setColumnCount(2);
+      pelBinding.testingArea.setOrientation(LinearLayout.HORIZONTAL);
+      pelBinding.testingArea.setPadding(
+          pelBinding.testingArea.getLeft(),
+          (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics()),
+          pelBinding.testingArea.getRight(),
+          (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics())
+      );
+
+    } else {
+
+      pelBinding.userInputLayout.setRowCount(2);
+      pelBinding.userInputLayout.setColumnCount(1);
+      pelBinding.testingArea.setOrientation(LinearLayout.VERTICAL);
+      pelBinding.testingArea.setPadding(
+          pelBinding.testingArea.getLeft(),
+          (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()),
+          pelBinding.testingArea.getRight(),
+          (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics())
+      );
+
+    }
 
     pelBinding.loginBtn.setOnClickListener(v -> {
       if (Objects.requireNonNull(pelBinding.emailInput.getText()).toString().equals("admin")) {
@@ -48,11 +77,6 @@ public class PersonalEmailLoginActivity extends AppCompatActivity implements Aut
 
       }
     });
-
-    pelBinding.registerHyperlink.setOnClickListener(v -> {
-      // TODO: Implement it
-      Toast.makeText(this, "Registration is not yet implemented", Toast.LENGTH_SHORT).show();
-    });
   }
 
   @Override
@@ -66,13 +90,11 @@ public class PersonalEmailLoginActivity extends AppCompatActivity implements Aut
 
     if (email_sent) {
 
-      Intent intent = new Intent(this, PersonalEmailLoginBridgeActivity.class);
-      intent.putExtra("email", pelBinding.emailInput.getText());
-      startActivity(intent);
+      startActivity(new Intent(this, PersonalEmailLoginBridgeActivity.class));
 
-    } else { // Failed to login
+    } else { // Email wasn't sent
 
-      Toast.makeText(this, "Sign-in failed; " + AuthService.error, Toast.LENGTH_LONG).show();
+      Toast.makeText(this, "Sign-in failed; " + FirebaseAuthService.getCurrentError(), Toast.LENGTH_LONG).show();
       pelBinding.loginBtn.setAlpha(1f);
       pelBinding.loginBtn.setText(R.string.loginBtnText);
       pelBinding.loginBtn.setEnabled(true);

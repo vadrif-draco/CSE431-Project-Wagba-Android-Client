@@ -3,116 +3,154 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/night_accent_complementary50"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
     tools:context=".activities.PersonalEmailLoginActivity">
-
+    <!-- android:fitsSystemWindows is very important for the root layout -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
+        android:background="@color/night_accent_complementary50"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/testingArea"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="48dp">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/emailLabel"
-                android:layout_width="match_parent"
+            <GridLayout
+                android:id="@+id/userInputLayout"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="48dp"
-                android:text="@string/emailLabel"
-                android:textColor="@color/night_primary_complementary" />
+                android:columnCount="1"
+                android:rowCount="2"
+                android:useDefaultMargins="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/emailInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="48dp"
-                android:layout_marginBottom="48dp"
-                android:backgroundTint="@color/night_primary_complementary"
-                android:ems="10"
-                android:hint=""
-                android:inputType="textEmailAddress"
-                android:minHeight="48dp"
-                android:textColor="@color/night_accent"
-                tools:ignore="SpeakableTextPresentCheck" />
+                <LinearLayout
+                    android:id="@+id/emailLabelLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/loginBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="48dp"
-                android:foreground="?attr/selectableItemBackground"
-                android:paddingVertical="8dp"
-                android:text="@string/loginBtnText"
-                android:textColor="@color/night_primary"
-                app:backgroundTint="@color/night_primary_complementary" />
+                    <TextView
+                        android:id="@+id/emailLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/emailLabel"
+                        android:textColor="@color/night_primary_complementary" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/emailInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/night_primary_complementary"
+                        android:ems="10"
+                        android:hint=""
+                        android:inputType="textEmailAddress"
+                        android:minHeight="48dp"
+                        android:textColor="@color/night_accent"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/loginBtnLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/loginBtn"
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="24dp"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:paddingVertical="8dp"
+                        android:text="@string/loginBtnText"
+                        android:textColor="@color/night_primary"
+                        app:backgroundTint="@color/night_primary_complementary" />
+
+                </LinearLayout>
+
+            </GridLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="24dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/userInputLayout">
 
                 <TextView
                     android:id="@+id/registerPrompt"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
+                    android:gravity="center"
                     android:text="@string/registerPromptText"
-                    android:textColor="@color/night_primary_complementary" />
+                    android:textColor="@color/night_primary_complementary"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/registerHyperlink"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginBottom="48dp"
                     android:gravity="center"
                     android:text="@string/registerHyperlinkText"
-                    android:textColor="@color/night_accent" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:background="@color/night_accent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="24dp">
-
-                <TextView
-                    android:id="@+id/testPrompt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="4dp"
-                    android:text="@string/testingInsertPrompt"
-                    android:textColor="@color/night_accent_complementary100"
-                    android:textStyle="italic" />
-
-                <TextView
-                    android:id="@+id/testEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/testingEntranceKeyword"
-                    android:textColor="@color/night_accent_complementary50" />
+                    android:textColor="@color/night_accent"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
-        </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/testingArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/night_accent"
+        android:baselineAligned="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingVertical="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <TextView
+            android:id="@+id/testPrompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:text="@string/testingInsertPrompt"
+            android:textColor="@color/night_accent_complementary100"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/testEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:text="@string/testingEntranceKeyword"
+            android:textColor="@color/night_accent_complementary50" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

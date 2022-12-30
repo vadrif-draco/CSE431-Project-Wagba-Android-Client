@@ -1,21 +1,20 @@
 package asu.foe.wagba8805.activities;
 
-import static asu.foe.wagba8805.Constants.TAG;
+import static asu.foe.wagba8805.Constants.SHARED_PREFS;
+import static asu.foe.wagba8805.services.FirebaseAuthService.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
-
+import asu.foe.wagba8805.MainActivity;
 import asu.foe.wagba8805.databinding.PersonalEmailLoginBridgeBinding;
+import asu.foe.wagba8805.interfaces.AuthResponsiveActivity;
+import asu.foe.wagba8805.services.FirebaseAuthService;
 
-public class PersonalEmailLoginBridgeActivity extends AppCompatActivity {
+public class PersonalEmailLoginBridgeActivity extends AppCompatActivity implements AuthResponsiveActivity {
 
   PersonalEmailLoginBridgeBinding plebBinding;
 
@@ -24,11 +23,15 @@ public class PersonalEmailLoginBridgeActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
+    // Since this is another plausible entry point to the application, need to initialize shared preferences variable
+    MainActivity.sharedPrefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+
     plebBinding = PersonalEmailLoginBridgeBinding.inflate(getLayoutInflater());
     setContentView(plebBinding.getRoot());
 
-    Intent intent = getIntent();
-    plebBinding.emailTV.setText(intent.getCharSequenceExtra("email"));
+    plebBinding.emailTV.setText(FirebaseAuthService.getCurrentSignInEmail());
+
+    login(this);
 
   }
 
@@ -42,42 +45,26 @@ public class PersonalEmailLoginBridgeActivity extends AppCompatActivity {
   @Override
   protected void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
-    FirebaseDynamicLinks.getInstance()
-        .getDynamicLink(getIntent())
-        .addOnFailureListener(this, e -> Log.w(TAG, "getDynamicLink:onFailure", e))
-        .addOnSuccessListener(this, pendingDynamicLinkData -> {
+    login(this);
+  }
 
-          // Get deep link from result (may be null if no link is found)
-          // getDynamicLink() retrieves the link and clears that data so that it is only processed once
-          if (pendingDynamicLinkData != null) pendingDynamicLinkData.getLink();
+  @Override
+  public void respondToAuth(boolean logged_in) {
 
-          FirebaseAuth auth = FirebaseAuth.getInstance();
-          String emailLink = intent.getData().toString();
-          Toast.makeText(this, emailLink, Toast.LENGTH_SHORT).show();
+    if (logged_in) {
 
-          // Confirm the link is a sign-in with email link.
-          if (auth.isSignInWithEmailLink(emailLink)) {
+      startActivity(new Intent(this, RestaurantsActivity.class)); // Proceed to app
+      finishAffinity(); // Pop all activities under this activity as well as itself
 
-            // The client SDK will parse the code from the link
-            auth.signInWithEmailLink(plebBinding.emailTV.getText().toString(), emailLink)
-                .addOnCompleteListener(task -> {
-                  if (task.isSuccessful()) {
-                    Log.d(TAG, "Successfully signed in with email link!");
-                    AuthResult result = task.getResult();
-                    // You can access the new user via result.getUser()
-                    // Additional user info profile *IS NOT* available via: result.getAdditionalUserInfo().getProfile()
-                    // You can check if the user is new or existing: result.getAdditionalUserInfo().isNewUser()
-                    // -------------------------------------------------------------------------------------------------
-                    // TODO: Read authentication stuff from path I guess? Confirm that email matches.
-                    // Handle the deep link. For example, open the linked content
-                    // TODO: get "authResult" from somewhere and pass it to AuthService
-                    // startActivity(new Intent(this, RestaurantsActivity.class)); // Proceed to app
-                    // finishAffinity(); // Pop all activities under this activity as well as itself
-                  } else {
-                    Log.e(TAG, "Error signing in with email link", task.getException());
-                  }
-                });
-          }
-        });
+    } else {
+
+      Toast.makeText(this, "Sign-in failed; " + FirebaseAuthService.getCurrentError(), Toast.LENGTH_LONG).show();
+      // Since this is an entry point of its own, simply finishing it won't get us back to main activity in some cases, so:
+      startActivity(new Intent(this, PersonalEmailLoginActivity.class)); // Back to main activity
+      finishAffinity(); // Pop all activities under this activity as well as itself
+
+    }
+    // TODO: Clear salt and email (in AuthService!!!!! NOT HERE)
+
   }
 }

@@ -17,14 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import asu.foe.wagba8805.activities.FacultyEmailLoginActivity;
 import asu.foe.wagba8805.activities.GmailLoginActivity;
 import asu.foe.wagba8805.activities.PersonalEmailLoginActivity;
 import asu.foe.wagba8805.activities.RestaurantsActivity;
 import asu.foe.wagba8805.databinding.EntryBinding;
-import asu.foe.wagba8805.services.AuthService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -75,10 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
     LocalBroadcastManager.getInstance(this).registerReceiver(mainActivityBR, new IntentFilter("toMainActivity"));
 
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    if (user != null) {
-      AuthService.accessToken = sharedPrefs.getString("accessToken", "");
-      AuthService.idToken = sharedPrefs.getString("idToken", "");
+    if (FirebaseAuth.getInstance().getCurrentUser() != null) {
       startActivity(new Intent(this, RestaurantsActivity.class));
       finish();
     }
