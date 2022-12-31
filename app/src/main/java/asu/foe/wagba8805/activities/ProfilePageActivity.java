@@ -36,8 +36,8 @@ public class ProfilePageActivity extends AppCompatActivity {
       finishAffinity();
     });
 
-    ppBinding.img.setOnClickListener(v -> {
-      startActivity(new Intent(this, ProfileCreationActivity.class));
+    ppBinding.profilePicChangeBtn.setOnClickListener(v -> {
+      startActivity(new Intent(this, ProfilePicChangeActivity.class));
     });
 
     // TODO: Place admin as user with uuid 1 in roomDB; insert if not already exists (to simulate persistence)!!

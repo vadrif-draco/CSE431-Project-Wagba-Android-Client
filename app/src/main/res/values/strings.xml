@@ -30,4 +30,5 @@
     <string name="uploadingPrompt">Uploading…</string>
     <string name="browsePrompt">Browse</string>
     <string name="profileCreationPageTitle">Stylish!</string>
+    <string name="profilePicChangeBtn">Change your profile picture!</string>
 </resources>

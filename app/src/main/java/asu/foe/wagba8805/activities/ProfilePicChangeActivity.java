@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -18,44 +19,42 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.List;
 
 import asu.foe.wagba8805.R;
-import asu.foe.wagba8805.databinding.ProfileCreationBinding;
+import asu.foe.wagba8805.databinding.ProfilePicChangePageBinding;
 import asu.foe.wagba8805.pojos.ImgurResponse;
 import asu.foe.wagba8805.pojos.User;
 import asu.foe.wagba8805.services.FirebaseProfileService;
 import asu.foe.wagba8805.services.ImgurUploadService;
 import asu.foe.wagba8805.viewmodels.UserViewModel;
 
-public class ProfileCreationActivity extends AppCompatActivity implements ImgurUploadService.ImgurUploadServiceResponsiveActivity {
+public class ProfilePicChangeActivity extends AppCompatActivity implements ImgurUploadService.ImgurUploadServiceResponsiveActivity {
 
-  ProfileCreationBinding pcBinding;
+  ProfilePicChangePageBinding pppBinding;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
-    pcBinding = ProfileCreationBinding.inflate(getLayoutInflater());
-    setContentView(pcBinding.getRoot());
+    pppBinding = ProfilePicChangePageBinding.inflate(getLayoutInflater());
+    setContentView(pppBinding.getRoot());
 
-    pcBinding.browseBtn.setOnClickListener(v -> {
+    pppBinding.browseBtn.setOnClickListener(v -> {
       Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
       startActivityForResult(i, IMAGE_BROWSE_RC);
     });
 
-    pcBinding.uploadBtn.setOnClickListener(v -> {
+    pppBinding.uploadBtn.setOnClickListener(v -> {
       ImgurUploadService imgurUploadService = new ImgurUploadService(this);
-      imgurUploadService.execute(((BitmapDrawable) pcBinding.img.getDrawable()).getBitmap());
+      imgurUploadService.execute(((BitmapDrawable) pppBinding.img.getDrawable()).getBitmap());
     });
 
     if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
-      pcBinding.gridLayout.setRowCount(1);
-      pcBinding.gridLayout.setColumnCount(2);
+      pppBinding.gridLayout.setOrientation(LinearLayout.HORIZONTAL);
 
     } else {
 
-      pcBinding.gridLayout.setRowCount(2);
-      pcBinding.gridLayout.setColumnCount(1);
+      pppBinding.gridLayout.setOrientation(LinearLayout.VERTICAL);
 
     }
   }
@@ -75,22 +74,22 @@ public class ProfileCreationActivity extends AppCompatActivity implements ImgurU
           .load(data.getData())
           .centerCrop()
           .apply(RequestOptions.circleCropTransform())
-          .into(pcBinding.img);
-      pcBinding.uploadBtn.setEnabled(true);
+          .into(pppBinding.img);
+      pppBinding.uploadBtn.setEnabled(true);
     }
   }
 
   public void respondToUploadBegin() {
-    pcBinding.uploadBtn.setEnabled(false);
-    pcBinding.saveBtn.setEnabled(false);
-    pcBinding.uploadBtn.setText(R.string.uploadingPrompt);
+    pppBinding.uploadBtn.setEnabled(false);
+    pppBinding.saveBtn.setEnabled(false);
+    pppBinding.uploadBtn.setText(R.string.uploadingPrompt);
   }
 
   public void respondToUploadEnd(ImgurResponse response) {
-    pcBinding.uploadBtn.setEnabled(true);
-    pcBinding.uploadBtn.setText(R.string.uploadPrompt);
-    pcBinding.saveBtn.setEnabled(true);
-    pcBinding.saveBtn.setOnClickListener(v -> {
+    pppBinding.uploadBtn.setEnabled(true);
+    pppBinding.uploadBtn.setText(R.string.uploadPrompt);
+    pppBinding.saveBtn.setEnabled(true);
+    pppBinding.saveBtn.setOnClickListener(v -> {
       UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
       LiveData<List<User>> l = userViewModel.getUserByUUID(FirebaseProfileService.getUuid());
       Observer<List<User>> o = new Observer<List<User>>() {
