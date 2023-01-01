@@ -25,7 +25,8 @@
         <activity
             android:name=".activities.PersonalEmailLoginBridgeActivity"
             android:exported="true"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Wagba">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -48,28 +49,33 @@
         </activity>
         <activity
             android:name=".activities.GmailLoginActivity"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/Theme.Wagba">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".activities.ProfilePageActivity"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/Theme.Wagba"
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".activities.DishesActivity"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/Theme.Wagba">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".activities.RestaurantsActivity"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/Theme.Wagba">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

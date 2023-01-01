@@ -3,6 +3,7 @@ package asu.foe.wagba8805.activities;
 import static asu.foe.wagba8805.Constants.SHARED_PREFS;
 import static asu.foe.wagba8805.services.FirebaseAuthService.login;
 
+import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -49,11 +50,22 @@ public class PersonalEmailLoginBridgeActivity extends AppCompatActivity implemen
   }
 
   @Override
-  public void respondToAuth(boolean logged_in) {
+  public void respondToAuth(Boolean loggedIn, Boolean isNewUser) {
 
-    if (logged_in) {
+    if (loggedIn) {
 
-      startActivity(new Intent(this, RestaurantsActivity.class)); // Proceed to app
+      TaskStackBuilder tsb = TaskStackBuilder.create(this);
+      Intent proceedToAppIntent = new Intent(this, RestaurantsActivity.class);
+      tsb.addNextIntent(proceedToAppIntent);
+
+      if (isNewUser) { // If a new user, direct first to profile page
+        proceedToAppIntent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        Intent isNewUserIntent = new Intent(this, ProfilePageActivity.class);
+        isNewUserIntent.putExtra("isNewUser", true);
+        tsb.addNextIntent(isNewUserIntent);
+      }
+
+      tsb.startActivities();
       finishAffinity(); // Pop all activities under this activity as well as itself
 
     } else {

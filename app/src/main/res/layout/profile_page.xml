@@ -1,74 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/night_accent_complementary25"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
     tools:context=".activities.ProfilePageActivity">
 
-    <!--    Change this to fit with restaurants and dishes pages -->
-    <TextView
-        android:id="@+id/welcomeTV"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:fontFamily="@font/curlz"
-        android:gravity="center"
-        android:shadowColor="@color/night_primary_complementary"
-        android:shadowRadius="10"
-        android:text="@string/welcome_prompt"
-        android:textColor="@color/night_primary_complementary"
-        android:textSize="80sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingVertical="24dp">
 
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="48dp"
-        android:src="@drawable/user_placeholder"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcomeTV"
-        tools:ignore="ContentDescription" />
+        <!--    Change this to fit with restaurants and dishes pages -->
+        <TextView
+            android:id="@+id/welcomeTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/curlz"
+            android:gravity="center"
+            android:shadowColor="@color/night_primary_complementary"
+            android:shadowRadius="10"
+            android:text="@string/welcome_prompt"
+            android:textColor="@color/night_primary_complementary"
+            android:textSize="80sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/profilePicChangeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/night_primary"
-        android:contentDescription="@string/profilePicChangeBtn"
-        android:src="@drawable/edit_camera"
-        app:layout_constraintBottom_toBottomOf="@id/img"
-        app:layout_constraintEnd_toEndOf="@id/img"
-        app:tint="@color/night_primary_complementary" />
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="48dp"
+            android:src="@drawable/user_placeholder"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/welcomeTV"
+            tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:gravity="center"
-        android:text="@string/username_placeholder"
-        android:textColor="@color/night_accent"
-        android:textSize="24sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img" />
+        <ImageButton
+            android:id="@+id/profilePicChangeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/night_primary_complementary"
+            android:contentDescription="@string/profilePicChangeBtn"
+            android:src="@drawable/edit_camera"
+            app:layout_constraintBottom_toBottomOf="@id/img"
+            app:layout_constraintEnd_toEndOf="@id/img"
+            app:tint="@color/night_primary" />
 
-    <Button
-        android:id="@+id/signOutBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/night_primary_complementary"
-        android:text="@string/sign_out_btn"
-        android:textColor="@color/night_accent_complementary"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/username" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageButton
+                android:id="@+id/displayNameEditCancelBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="8dp"
+                android:backgroundTint="#00000000"
+                android:contentDescription="@string/displayNameEditBtn"
+                android:padding="0dp"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:src="@drawable/edit_cancel"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/displayNameET"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.6"
+                app:tint="@color/design_default_color_error" />
+
+            <EditText
+                android:id="@+id/displayNameET"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:ellipsize="end"
+                android:gravity="center"
+                android:inputType="textPersonName"
+                android:lines="1"
+                android:text=""
+                android:textColor="@color/night_primary_complementary"
+                android:textSize="24sp"
+                android:visibility="gone"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/displayNameEditConfirmBtn"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@id/displayNameEditCancelBtn"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="LabelFor" />
+
+            <ImageButton
+                android:id="@+id/displayNameEditConfirmBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="8dp"
+                android:backgroundTint="#00000000"
+                android:contentDescription="@string/displayNameEditBtn"
+                android:padding="0dp"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:src="@drawable/edit_confirm"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@id/displayNameET"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.6"
+                app:tint="@color/night_accent" />
+
+            <TextView
+                android:id="@+id/displayNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lines="1"
+                android:text="@string/username_placeholder"
+                android:textColor="@color/night_primary_complementary"
+                android:textSize="24sp"
+                app:flow_horizontalBias="0"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/displayNameEditBtn"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/displayNameEditBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="4dp"
+                android:backgroundTint="@color/night_primary_complementary"
+                android:contentDescription="@string/displayNameEditBtn"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:src="@drawable/edit_pencil"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/displayNameTV"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/night_primary" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/email_placeholder"
+            android:textColor="@color/night_accent"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/username" />
+
+        <Button
+            android:id="@+id/signOutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:backgroundTint="@color/night_primary_complementary"
+            android:text="@string/sign_out_btn"
+            android:textColor="@color/night_primary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/email" />
+
+        <Button
+            android:id="@+id/proceedToAppBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="48dp"
+            android:backgroundTint="@color/night_primary_complementary"
+            android:text="@string/proceed_to_app_btn"
+            android:textColor="@color/night_primary"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/email" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

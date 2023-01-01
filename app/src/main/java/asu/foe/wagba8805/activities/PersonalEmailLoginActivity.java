@@ -86,9 +86,9 @@ public class PersonalEmailLoginActivity extends AppCompatActivity implements Aut
   }
 
   @Override
-  public void respondToAuth(boolean email_sent) {
+  public void respondToAuth(Boolean emailSent, Boolean isNewUser) {
 
-    if (email_sent) {
+    if (emailSent) {
 
       startActivity(new Intent(this, PersonalEmailLoginBridgeActivity.class));
 

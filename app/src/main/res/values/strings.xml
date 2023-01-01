@@ -21,7 +21,7 @@
     <string name="gmailPrompt">Login with Google (Gmail)</string>
     <string name="gmail_prompt">Sit tight, taking you to Google…</string>
     <string name="welcome_prompt">Welcome!</string>
-    <string name="username_placeholder">John Doe</string>
+    <string name="username_placeholder">Your Name</string>
     <string name="testingInsertPrompt">For testing, insert the following into the email field…</string>
     <string name="testingEntranceKeyword">admin</string>
     <string name="checkEmailPrompt">Please check your email:</string>
@@ -31,4 +31,7 @@
     <string name="browsePrompt">Browse</string>
     <string name="profileCreationPageTitle">Stylish!</string>
     <string name="profilePicChangeBtn">Change your profile picture!</string>
+    <string name="proceed_to_app_btn">Proceed</string>
+    <string name="email_placeholder">john@doe.com</string>
+    <string name="displayNameEditBtn">Edit your display name!</string>
 </resources>

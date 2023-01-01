@@ -37,6 +37,8 @@ public class FirebaseAuthService {
 
   // User signed in successfully.
   private static void respondToSuccess(@Nullable AuthResult authResult, AuthResponsiveActivity activity) {
+    admin = false; // If there's a real sign-in, that's definitely not the fake admin account, so unset the flag
+    boolean isNewUser = false;
     if (authResult != null) {
       SharedPreferences.Editor sharedPrefsEditor = MainActivity.sharedPrefs.edit();
       sharedPrefsEditor.putString("accessToken", ((OAuthCredential) Objects.requireNonNull(authResult.getCredential())).getAccessToken());
@@ -47,6 +49,7 @@ public class FirebaseAuthService {
       if (FirebaseProfileService.getUuid() != null &&
           authResult.getAdditionalUserInfo() != null &&
           authResult.getAdditionalUserInfo().isNewUser()) {
+        isNewUser = true;
         User user = new User(
             FirebaseProfileService.getUuid(),
             FirebaseProfileService.getEmail(),
@@ -58,7 +61,7 @@ public class FirebaseAuthService {
         userRepo.insert(user);
       }
     }
-    activity.respondToAuth(true);
+    activity.respondToAuth(true, isNewUser);
   }
 
   // User failed to sign in.
@@ -66,7 +69,7 @@ public class FirebaseAuthService {
     String err = (e != null) ? e.getMessage() : null;
     error = (err != null) ? err.toLowerCase() : "undefined error";
     Log.e(TAG, "Exception in authentication:\n" + e);
-    activity.respondToAuth(false);
+    activity.respondToAuth(false, null);
   }
 
   private static void handlePendingAuth(OAuthProvider.Builder provider, AuthResponsiveActivity activity) {

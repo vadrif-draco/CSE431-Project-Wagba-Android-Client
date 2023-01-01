@@ -5,6 +5,7 @@ import static asu.foe.wagba8805.Constants.ENABLE_LOGIN_BUTTONS;
 import static asu.foe.wagba8805.Constants.FINISH_YOURSELF;
 import static asu.foe.wagba8805.services.FirebaseAuthService.login;
 
+import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -48,14 +49,27 @@ public class FacultyEmailLoginActivity extends AppCompatActivity implements Auth
   }
 
   @Override
-  public void respondToAuth(boolean logged_in) {
+  public void respondToAuth(Boolean loggedIn, Boolean isNewUser) {
 
     Intent intent = new Intent("toMainActivity");
-    if (logged_in) { // Logged in successfully
+    if (loggedIn) { // Logged in successfully
 
       intent.putExtra("message", FINISH_YOURSELF);
       LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-      startActivity(new Intent(this, RestaurantsActivity.class)); // Proceed to app
+
+      TaskStackBuilder tsb = TaskStackBuilder.create(this);
+      Intent proceedToAppIntent = new Intent(this, RestaurantsActivity.class);
+      tsb.addNextIntent(proceedToAppIntent);
+
+      if (isNewUser) { // If a new user, direct first to profile page
+        proceedToAppIntent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        Intent isNewUserIntent = new Intent(this, ProfilePageActivity.class);
+        isNewUserIntent.putExtra("isNewUser", true);
+        tsb.addNextIntent(isNewUserIntent);
+      }
+
+      tsb.startActivities();
+      finishAffinity(); // Pop all activities under this activity as well as itself
 
     } else { // Failed to login
 
