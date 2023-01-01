@@ -177,6 +177,56 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/username" />
 
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/genderArea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:gravity="center"
+            android:paddingHorizontal="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/email">
+
+            <TextView
+                android:id="@+id/genderTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lines="1"
+                android:text="@string/genderPlaceholder"
+                android:textColor="@color/night_primary_complementary"
+                android:textSize="20sp"
+                app:flow_horizontalBias="0"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/genderEditBtn"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/genderEditBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="4dp"
+                android:backgroundTint="@color/night_primary_complementary"
+                android:contentDescription="@string/displayNameEditBtn"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:src="@drawable/edit_pencil"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/genderTV"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/night_primary" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <Button
             android:id="@+id/signOutBtn"
             android:layout_width="wrap_content"
@@ -187,7 +237,7 @@
             android:textColor="@color/night_primary"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/email" />
+            app:layout_constraintTop_toBottomOf="@id/genderArea" />
 
         <Button
             android:id="@+id/proceedToAppBtn"
@@ -200,7 +250,7 @@
             android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/email" />
+            app:layout_constraintTop_toBottomOf="@id/genderArea" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

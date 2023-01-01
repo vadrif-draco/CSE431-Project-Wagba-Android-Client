@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ListPopupWindow;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -17,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.Arrays;
 import java.util.List;
 
 import asu.foe.wagba8805.MainActivity;
@@ -32,6 +35,9 @@ public class ProfilePageActivity extends AppCompatActivity {
   ProfilePageBinding ppBinding;
   UserViewModel userViewModel;
   Boolean editing = false;
+  List<Boolean> genderSpinnerBooleanList = Arrays.asList(true, false, null);
+  List<String> genderSpinnerStringList = Arrays.asList("Male", "Female", "Gender Unspecified");
+  ListPopupWindow genderListPopupWindow;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -40,32 +46,6 @@ public class ProfilePageActivity extends AppCompatActivity {
 
     ppBinding = ProfilePageBinding.inflate(getLayoutInflater());
     setContentView(ppBinding.getRoot());
-
-    userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-    userViewModel.getUserByUUID(FirebaseProfileService.getUuid()).observe(this, users -> {
-
-      // There is only ever one user (or null) returned from this query
-      User user = (users.size() > 0) ? users.get(0) : null;
-
-      GlideUrl imgUrl = (user == null) ? FirebaseProfileService.getGlideUrl() : (user.imgUrl == null) ? null : new GlideUrl(user.imgUrl);
-      String displayName = (user == null) ? FirebaseProfileService.getDisplayName() : user.displayName;
-      String email = (user == null) ? FirebaseProfileService.getEmail() : user.email;
-      Boolean isMale = (user == null) ? null : user.isMale; // Null means unspecified
-
-      Glide.with(this)
-          .load(imgUrl)
-          .thumbnail(Glide.with(this).load(R.drawable.user_placeholder))
-          .centerCrop()
-          .apply(RequestOptions.circleCropTransform())
-          .into(ppBinding.img);
-
-      if (displayName != null && !displayName.isEmpty()) {
-        ppBinding.displayNameTV.setText(displayName);
-      }
-      ppBinding.email.setText(email);
-      // TODO: ppBinding.gender
-
-    });
 
     Intent isNewUserIntent = getIntent();
     if (isNewUserIntent.getBooleanExtra("isNewUser", false)) {
@@ -118,6 +98,57 @@ public class ProfilePageActivity extends AppCompatActivity {
       l.observeForever(o);
 
       endEditDisplayName();
+    });
+
+    genderListPopupWindow = new ListPopupWindow(this);
+    ArrayAdapter<String> aa = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, genderSpinnerStringList);
+    genderListPopupWindow.setAdapter(aa);
+    genderListPopupWindow.setAnchorView(ppBinding.genderArea);
+    genderListPopupWindow.setModal(true);
+    genderListPopupWindow.setWidth(ListPopupWindow.WRAP_CONTENT);
+    genderListPopupWindow.setOnItemClickListener((adapterView, view, i, l_) -> {
+
+      LiveData<List<User>> l = userViewModel.getUserByUUID(FirebaseProfileService.getUuid());
+      Observer<List<User>> o = new Observer<List<User>>() {
+        @Override
+        public void onChanged(List<User> users) {
+          User user = users.get(0);
+          user.isMale = genderSpinnerBooleanList.get(i);
+          userViewModel.updateUserData(user);
+          l.removeObserver(this);
+        }
+      };
+      l.observeForever(o);
+
+      genderListPopupWindow.dismiss();
+    });
+
+    ppBinding.genderEditBtn.setOnClickListener(v -> genderListPopupWindow.show());
+
+    userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+    userViewModel.getUserByUUID(FirebaseProfileService.getUuid()).observe(this, users -> {
+
+      // There is only ever one user (or null) returned from this query
+      User user = (users.size() > 0) ? users.get(0) : null;
+
+      GlideUrl imgUrl = (user == null) ? FirebaseProfileService.getGlideUrl() : (user.imgUrl == null) ? null : new GlideUrl(user.imgUrl);
+      String displayName = (user == null) ? FirebaseProfileService.getDisplayName() : user.displayName;
+      String email = (user == null) ? FirebaseProfileService.getEmail() : user.email;
+      Boolean isMale = (user == null) ? null : user.isMale; // Null means unspecified
+
+      Glide.with(this)
+          .load(imgUrl)
+          .thumbnail(Glide.with(this).load(R.drawable.user_placeholder))
+          .centerCrop()
+          .apply(RequestOptions.circleCropTransform())
+          .into(ppBinding.img);
+
+      if (displayName != null && !displayName.isEmpty()) {
+        ppBinding.displayNameTV.setText(displayName);
+      }
+      ppBinding.email.setText(email);
+      ppBinding.genderTV.setText(genderSpinnerStringList.get(genderSpinnerBooleanList.indexOf(isMale)));
+
     });
   }
 
