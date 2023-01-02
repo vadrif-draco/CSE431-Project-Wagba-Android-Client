@@ -19,7 +19,7 @@ public interface DishDao {
   @Query("SELECT * FROM dish_table WHERE id = :dish_id AND restaurant_id = :restaurant_id")
   LiveData<List<Dish>> getDish(int dish_id, int restaurant_id);
 
-  @Query("SELECT * FROM dish_table WHERE restaurant_id = :restaurant_id")
+  @Query("SELECT * FROM dish_table WHERE restaurant_id = :restaurant_id ORDER BY id ASC")
   LiveData<List<Dish>> getDishesByRestaurantId(int restaurant_id);
 
 }

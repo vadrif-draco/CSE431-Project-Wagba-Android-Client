@@ -19,7 +19,7 @@ public interface RestaurantDao {
   @Query("SELECT * FROM restaurant_table")
   LiveData<List<Restaurant>> getAllRestaurants();
 
-  @Query("SELECT * FROM restaurant_table WHERE id = :id")
+  @Query("SELECT * FROM restaurant_table WHERE id = :id ORDER BY id ASC")
   LiveData<List<Restaurant>> getRestaurantByID(int id);
 
 }

@@ -31,6 +31,7 @@ public class Dish {
   public String name;
   public String description;
   public String imageUrl;
+  public int inCartQuantity = 0;
 
   public Dish() {
   }
