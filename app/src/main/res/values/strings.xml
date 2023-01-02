@@ -35,4 +35,8 @@
     <string name="email_placeholder">john@doe.com</string>
     <string name="displayNameEditBtn">Edit your display name!</string>
     <string name="genderPlaceholder">Gender Unspecified</string>
+    <string name="restaurantNamePlaceholder">Some restaurant</string>
+    <string name="restaurantAddressPlaceholder">123 Some City, Some Address St.</string>
+    <string name="dishNamePlaceholder">Some dish</string>
+    <string name="dishDescriptionPlaceholder">123 Some City, Some Address St.</string>
 </resources>
