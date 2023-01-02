@@ -15,10 +15,10 @@ import com.bumptech.glide.request.RequestOptions;
 
 import asu.foe.wagba8805.R;
 import asu.foe.wagba8805.databinding.DishesBinding;
-import asu.foe.wagba8805.pojos.DishesItem;
 import asu.foe.wagba8805.pojos.User;
 import asu.foe.wagba8805.rvAdapters.DishesItemListAdapter;
 import asu.foe.wagba8805.services.FirebaseProfileService;
+import asu.foe.wagba8805.viewmodels.DishViewModel;
 import asu.foe.wagba8805.viewmodels.UserViewModel;
 
 public class DishesActivity extends AppCompatActivity {
@@ -35,32 +35,9 @@ public class DishesActivity extends AppCompatActivity {
 
     RecyclerView dishesRV = dishesBinding.dishesRV;
     DishesItemListAdapter dishesAdapter = new DishesItemListAdapter(this);
-    dishesAdapter.set(new DishesItem[]{
-        new DishesItem("Some dish", "Some description", "some.image.url"),
-        new DishesItem("Some dish", "Some description", "some.image.url"),
-        new DishesItem("Some dish", "Some description", "some.image.url"),
-        new DishesItem("Some dish", "Some description", "some.image.url"),
-        new DishesItem("Some dish", "Some description", "some.image.url"),
-        new DishesItem("Some dish", "Some description", "some.image.url"),
-        new DishesItem("Some dish", "Some description", "some.image.url"),
-        new DishesItem("Some dish", "Some description", "some.image.url"),
-    });
+    DishViewModel dishViewModel = new ViewModelProvider(this).get(DishViewModel.class);
+    dishViewModel.getDishesByRestaurantID(getIntent().getIntExtra("restaurant_id", 0)).observe(this, dishesAdapter::set);
     dishesRV.setAdapter(dishesAdapter);
-    if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-      dishesRV.setLayoutManager(new GridLayoutManager(this, 2));
-      dishesRV.setPadding(
-          48,
-          dishesRV.getPaddingTop(),
-          48,
-          0
-      );
-    } else {
-      dishesRV.setLayoutManager(new GridLayoutManager(this, 1));
-    }
-
-    dishesBinding.profileIcon.setOnClickListener(v -> {
-      startActivity(new Intent(this, ProfilePageActivity.class));
-    });
 
     UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
     userViewModel.getUserByUUID(FirebaseProfileService.getUuid()).observe(this, users -> {
@@ -74,6 +51,17 @@ public class DishesActivity extends AppCompatActivity {
           .apply(RequestOptions.circleCropTransform())
           .into(dishesBinding.profileIcon);
 
+    });
+
+    if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+      dishesRV.setLayoutManager(new GridLayoutManager(this, 2));
+      dishesRV.setPadding(48, dishesRV.getPaddingTop(), 48, 0);
+    } else {
+      dishesRV.setLayoutManager(new GridLayoutManager(this, 1));
+    }
+
+    dishesBinding.profileIcon.setOnClickListener(v -> {
+      startActivity(new Intent(this, ProfilePageActivity.class));
     });
   }
 

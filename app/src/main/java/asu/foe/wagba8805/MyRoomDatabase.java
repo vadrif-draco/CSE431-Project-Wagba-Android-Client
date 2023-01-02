@@ -6,10 +6,14 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import asu.foe.wagba8805.interfaces.daos.DishDao;
+import asu.foe.wagba8805.interfaces.daos.RestaurantDao;
 import asu.foe.wagba8805.interfaces.daos.UserDao;
+import asu.foe.wagba8805.pojos.Dish;
+import asu.foe.wagba8805.pojos.Restaurant;
 import asu.foe.wagba8805.pojos.User;
 
-@Database(entities = {User.class}, version = 2, exportSchema = false)
+@Database(entities = {User.class, Restaurant.class, Dish.class}, version = 4, exportSchema = false)
 public abstract class MyRoomDatabase extends RoomDatabase {
 
   private static volatile MyRoomDatabase INSTANCE;
@@ -29,5 +33,9 @@ public abstract class MyRoomDatabase extends RoomDatabase {
   }
 
   public abstract UserDao getUserDao();
+
+  public abstract RestaurantDao getRestaurantDao();
+
+  public abstract DishDao getDishDao();
 
 }

@@ -14,6 +14,7 @@ import asu.foe.wagba8805.MainActivity;
 import asu.foe.wagba8805.databinding.PersonalEmailLoginBridgeBinding;
 import asu.foe.wagba8805.interfaces.AuthResponsiveActivity;
 import asu.foe.wagba8805.services.FirebaseAuthService;
+import asu.foe.wagba8805.services.FirebaseRTDBService;
 
 public class PersonalEmailLoginBridgeActivity extends AppCompatActivity implements AuthResponsiveActivity {
 
@@ -24,7 +25,8 @@ public class PersonalEmailLoginBridgeActivity extends AppCompatActivity implemen
     super.onCreate(savedInstanceState);
     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
-    // Since this is another plausible entry point to the application, need to initialize shared preferences variable
+    // Since this is another plausible entry point to the application, need to initialize some stuff here too
+    FirebaseRTDBService.init(getApplication());
     MainActivity.sharedPrefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
 
     plebBinding = PersonalEmailLoginBridgeBinding.inflate(getLayoutInflater());

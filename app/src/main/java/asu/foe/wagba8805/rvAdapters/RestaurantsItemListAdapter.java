@@ -10,15 +10,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import asu.foe.wagba8805.R;
 import asu.foe.wagba8805.activities.DishesActivity;
 import asu.foe.wagba8805.databinding.RestaurantsItemBinding;
-import asu.foe.wagba8805.pojos.RestaurantsItem;
+import asu.foe.wagba8805.pojos.Restaurant;
 
 public class RestaurantsItemListAdapter extends RecyclerView.Adapter<RestaurantsItemListAdapter.ViewHolder> {
 
   private final Context mContext;
-  private RestaurantsItem[] restaurantItems;
+  private List<Restaurant> restaurantItems = new ArrayList<>();
 
   public RestaurantsItemListAdapter(Context context) {
     this.mContext = context;
@@ -41,7 +44,7 @@ public class RestaurantsItemListAdapter extends RecyclerView.Adapter<Restaurants
 
   @Override
   public void onBindViewHolder(ViewHolder holder, int position) {
-    RestaurantsItem item = restaurantItems[position];
+    Restaurant item = restaurantItems.get(position);
     Glide.with(holder.itemView)
         .load(item.imageUrl)
         .thumbnail(
@@ -54,17 +57,18 @@ public class RestaurantsItemListAdapter extends RecyclerView.Adapter<Restaurants
     holder.binding.restaurantNameTV.setText(item.name);
     holder.binding.restaurantAddressTV.setText(item.address);
     holder.binding.proceedBtn.setOnClickListener(v -> {
-      // TODO: Pass identifier which the RoomDB can use as FK to get this restaurant's dishes
-      mContext.startActivity(new Intent(mContext, DishesActivity.class));
+      Intent intent = new Intent(mContext, DishesActivity.class);
+      intent.putExtra("restaurant_id", item.id);
+      mContext.startActivity(intent);
     });
   }
 
   @Override
   public int getItemCount() {
-    return restaurantItems.length;
+    return restaurantItems.size();
   }
 
-  public void set(RestaurantsItem[] items) {
+  public void set(List<Restaurant> items) {
     this.restaurantItems = items;
     notifyDataSetChanged();
   }

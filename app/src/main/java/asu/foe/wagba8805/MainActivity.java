@@ -29,6 +29,7 @@ import asu.foe.wagba8805.activities.PersonalEmailLoginActivity;
 import asu.foe.wagba8805.activities.RestaurantsActivity;
 import asu.foe.wagba8805.databinding.EntryBinding;
 import asu.foe.wagba8805.pojos.User;
+import asu.foe.wagba8805.services.FirebaseRTDBService;
 import asu.foe.wagba8805.viewmodels.UserViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -75,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+    FirebaseRTDBService.init(getApplication());
 
     sharedPrefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
 

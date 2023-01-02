@@ -10,14 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import asu.foe.wagba8805.R;
 import asu.foe.wagba8805.databinding.DishesItemBinding;
-import asu.foe.wagba8805.pojos.DishesItem;
+import asu.foe.wagba8805.pojos.Dish;
 
 public class DishesItemListAdapter extends RecyclerView.Adapter<DishesItemListAdapter.ViewHolder> {
 
   private final Context mContext;
-  private DishesItem[] dishesItems;
+  private List<Dish> dishes = new ArrayList<>();
 
   public DishesItemListAdapter(Context context) {
     this.mContext = context;
@@ -40,7 +43,7 @@ public class DishesItemListAdapter extends RecyclerView.Adapter<DishesItemListAd
 
   @Override
   public void onBindViewHolder(ViewHolder holder, int position) {
-    DishesItem item = dishesItems[position];
+    Dish item = dishes.get(position);
     Glide.with(holder.itemView)
         .load(item.imageUrl)
         .thumbnail(
@@ -59,11 +62,11 @@ public class DishesItemListAdapter extends RecyclerView.Adapter<DishesItemListAd
 
   @Override
   public int getItemCount() {
-    return dishesItems.length;
+    return dishes.size();
   }
 
-  public void set(DishesItem[] items) {
-    this.dishesItems = items;
+  public void set(List<Dish> items) {
+    this.dishes = items;
     notifyDataSetChanged();
   }
 }
