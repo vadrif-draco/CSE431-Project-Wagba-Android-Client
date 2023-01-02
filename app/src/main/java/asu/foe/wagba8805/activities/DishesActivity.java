@@ -61,7 +61,7 @@ public class DishesActivity extends AppCompatActivity {
     }
 
     dishesBinding.profileIcon.setOnClickListener(v -> {
-      startActivity(new Intent(this, ProfilePageActivity.class));
+      startActivity(new Intent(this, MasterNavigationPageActivity.class));
     });
   }
 

@@ -61,7 +61,7 @@ public class RestaurantsActivity extends AppCompatActivity {
     }
 
     restaurantsBinding.profileIcon.setOnClickListener(v -> {
-      startActivity(new Intent(this, ProfilePageActivity.class));
+      startActivity(new Intent(this, MasterNavigationPageActivity.class));
     });
   }
 
