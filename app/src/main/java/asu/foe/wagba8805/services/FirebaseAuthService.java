@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.ActionCodeSettings;
@@ -19,6 +21,7 @@ import com.google.firebase.auth.OAuthProvider;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import asu.foe.wagba8805.MainActivity;
@@ -50,17 +53,31 @@ public class FirebaseAuthService {
           authResult.getAdditionalUserInfo() != null &&
           authResult.getAdditionalUserInfo().isNewUser()) {
         isNewUser = true;
-        User user = new User(
-            FirebaseProfileService.getUuid(),
-            FirebaseProfileService.getEmail(),
-            FirebaseProfileService.getDisplayName(),
-            FirebaseProfileService.getGlideUrl() == null ? null : FirebaseProfileService.getGlideUrl().toStringUrl(),
-            null
-        );
-        UserRepository userRepo = new UserRepository(((Activity) activity).getApplication());
-        userRepo.insert(user);
       }
+
+      // Regardless of whether "isNewUser" is true or false, if user is not stored in RoomDB, store them!
+      UserRepository userRepo = new UserRepository(((Activity) activity).getApplication());
+      LiveData<List<User>> usersLiveData = userRepo.getUserByUUID(FirebaseProfileService.getUuid());
+      Observer<List<User>> userObserver = new Observer<List<User>>() {
+        @Override
+        public void onChanged(List<User> users) {
+          if (users.size() == 0) {
+            userRepo.insert(
+                new User(
+                    FirebaseProfileService.getUuid(),
+                    FirebaseProfileService.getEmail(),
+                    FirebaseProfileService.getDisplayName(),
+                    FirebaseProfileService.getGlideUrl() == null ? null : FirebaseProfileService.getGlideUrl().toStringUrl(),
+                    null
+                )
+            );
+            usersLiveData.removeObserver(this);
+          }
+        }
+      };
+      usersLiveData.observeForever(userObserver);
     }
+
     activity.respondToAuth(true, isNewUser);
   }
 
