@@ -31,7 +31,7 @@ public class Dish {
   public String name;
   public String description;
   public String imageUrl;
-  public int inCartQuantity;
+  public int inCartQuantity; // FIXME: For some reason, this doesn't persist properly...
 
   public Dish() {
   }

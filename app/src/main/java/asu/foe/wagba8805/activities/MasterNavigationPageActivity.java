@@ -23,7 +23,7 @@ public class MasterNavigationPageActivity extends AppCompatActivity {
 
     mnpBinding.cartBtn.setOnClickListener(v -> startActivity(new Intent(this, CartActivity.class)));
 
-    // mnpBinding.ordersBtn.setOnClickListener(v -> startActivity(new Intent(this, OrdersPageActivity.class)));
+     mnpBinding.ordersBtn.setOnClickListener(v -> startActivity(new Intent(this, OrderActivity.class)));
   }
 
   @Override

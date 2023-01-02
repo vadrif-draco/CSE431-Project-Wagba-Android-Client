@@ -78,9 +78,22 @@ public class FirebaseRTDBService {
             };
             dishLive.observeForever(observer);
 
-
           }
         }
+      }
+
+      @Override
+      public void onCancelled(@NonNull DatabaseError error) {
+        // Failed to read value
+        Log.w(TAG, "Failed to read value.", error.toException());
+      }
+    });
+
+    database.getReference("orders").addValueEventListener(new ValueEventListener() {
+
+      @Override
+      public void onDataChange(@NonNull DataSnapshot snapshot) {
+        // TODO: Update RoomDB for orders
       }
 
       @Override

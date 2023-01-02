@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import asu.foe.wagba8805.databinding.CartRestaurantBinding;
-import asu.foe.wagba8805.pojos.Dish;
+import asu.foe.wagba8805.pojos.Order;
 import asu.foe.wagba8805.pojos.Restaurant;
 import asu.foe.wagba8805.viewmodels.DishViewModel;
 
@@ -26,7 +26,6 @@ public class CartRestaurantsItemListAdapter extends RecyclerView.Adapter<CartRes
 
   private final Context mContext;
   private List<Restaurant> restaurantsInCart = new ArrayList<>();
-  private List<Dish> dishesInCart = new ArrayList<>();
 
   public CartRestaurantsItemListAdapter(Context context) {
     this.mContext = context;
@@ -51,18 +50,24 @@ public class CartRestaurantsItemListAdapter extends RecyclerView.Adapter<CartRes
     DishViewModel dishViewModel = new ViewModelProvider((ViewModelStoreOwner) mContext).get(DishViewModel.class);
     dishViewModel.getDishesInCartForRestaurant(restaurant.id).observe((LifecycleOwner) mContext, dishes ->
     {
-      dishesInCart = dishes;
       cartRestaurantDishListAdapter.setDishesInCart(dishes);
+
+      holder.binding.orderBtn.setOnClickListener(v -> {
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("orders");
+        String key = myRef.push().getKey();
+        Order order = new Order(
+            key,
+            restaurant.id,
+            0,
+            dishes
+        );
+        myRef.child(key).setValue(order);
+      });
     });
     dishesRV.setAdapter(cartRestaurantDishListAdapter);
     dishesRV.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-
-    holder.binding.orderBtn.setOnClickListener(v -> {
-
-      FirebaseDatabase database = FirebaseDatabase.getInstance();
-      DatabaseReference myRef = database.getReference("orders");
-      myRef.child(myRef.push().getKey()).setValue(dishesInCart);
-    });
   }
 
   @NonNull
