@@ -55,7 +55,6 @@ public class DishesActivity extends AppCompatActivity {
 
     if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
       dishesRV.setLayoutManager(new GridLayoutManager(this, 2));
-      dishesRV.setPadding(48, dishesRV.getPaddingTop(), 48, 0);
     } else {
       dishesRV.setLayoutManager(new GridLayoutManager(this, 1));
     }

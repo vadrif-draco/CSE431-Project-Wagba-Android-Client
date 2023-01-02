@@ -13,7 +13,7 @@ import asu.foe.wagba8805.pojos.Dish;
 import asu.foe.wagba8805.pojos.Restaurant;
 import asu.foe.wagba8805.pojos.User;
 
-@Database(entities = {User.class, Restaurant.class, Dish.class}, version = 4, exportSchema = false)
+@Database(entities = {User.class, Restaurant.class, Dish.class}, version = 5, exportSchema = false)
 public abstract class MyRoomDatabase extends RoomDatabase {
 
   private static volatile MyRoomDatabase INSTANCE;

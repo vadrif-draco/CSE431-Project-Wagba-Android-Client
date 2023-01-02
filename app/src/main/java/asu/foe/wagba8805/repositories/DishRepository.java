@@ -23,8 +23,8 @@ public class DishRepository {
     new DishInsertAsyncTask(dishDao).execute(dish);
   }
 
-  public LiveData<List<Dish>> getDishByID(int id) {
-    return dishDao.getDishByID(id);
+  public LiveData<List<Dish>> getDish(int dish_id, int restaurant_id) {
+    return dishDao.getDish(dish_id, restaurant_id);
   }
 
   public LiveData<List<Dish>> getDishesByRestaurantId(int restaurant_id) {

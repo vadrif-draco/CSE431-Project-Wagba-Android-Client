@@ -39,7 +39,9 @@
     <string name="restaurantAddressPlaceholder">123 Some City, Some Address St.</string>
     <string name="dishNamePlaceholder">Some dish</string>
     <string name="dishDescriptionPlaceholder">123 Some City, Some Address St.</string>
-    <string name="profileNavPrompt">Customize your Pofile</string>
+    <string name="profileNavPrompt">Customize your Profile</string>
     <string name="cartNavPrompt">View Cart and Make Orders</string>
     <string name="ordersNavPrompt">Order History and Tracking</string>
+    <string name="out_of_stock">OUT OF STOCK</string>
+    <string name="add_this_dish_to_cart">Add this dish to cart</string>
 </resources>

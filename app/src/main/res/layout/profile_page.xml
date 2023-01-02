@@ -5,7 +5,7 @@
     android:id="@+id/scrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/night_accent_complementary25"
+    android:background="@color/night_accent_complementary50"
     android:fillViewport="true"
     android:fitsSystemWindows="true"
     tools:context=".activities.ProfilePageActivity">

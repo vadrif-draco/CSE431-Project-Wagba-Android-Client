@@ -25,8 +25,8 @@ public class DishViewModel extends AndroidViewModel {
   }
 
   // Although I only need one Dish, the architecture forces me to use a "list"
-  public LiveData<List<Dish>> getDishByID(int id) {
-    return dishRepository.getDishByID(id);
+  public LiveData<List<Dish>> getDish(int dish_id, int restaurant_id) {
+    return dishRepository.getDish(dish_id, restaurant_id);
   }
 
   public LiveData<List<Dish>> getDishesByRestaurantID(int restaurant_id) {

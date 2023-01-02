@@ -55,7 +55,6 @@ public class RestaurantsActivity extends AppCompatActivity {
 
     if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
       restaurantsRV.setLayoutManager(new GridLayoutManager(this, 2));
-      restaurantsRV.setPadding(48, restaurantsRV.getPaddingTop(), 48, 0);
     } else {
       restaurantsRV.setLayoutManager(new GridLayoutManager(this, 1));
     }
