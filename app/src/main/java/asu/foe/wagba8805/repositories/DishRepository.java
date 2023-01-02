@@ -30,4 +30,12 @@ public class DishRepository {
   public LiveData<List<Dish>> getDishesByRestaurantId(int restaurant_id) {
     return dishDao.getDishesByRestaurantId(restaurant_id);
   }
+
+  public LiveData<List<Dish>> getDishesInCart() {
+    return dishDao.getDishesInCart();
+  }
+
+  public LiveData<List<Dish>> getDishesInCartForRestaurant(int restaurant_id) {
+    return dishDao.getDishesInCartForRestaurant(restaurant_id);
+  }
 }

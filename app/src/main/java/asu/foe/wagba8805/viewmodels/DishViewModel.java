@@ -32,4 +32,12 @@ public class DishViewModel extends AndroidViewModel {
   public LiveData<List<Dish>> getDishesByRestaurantID(int restaurant_id) {
     return dishRepository.getDishesByRestaurantId(restaurant_id);
   }
+
+  public LiveData<List<Dish>> getDishesInCart() {
+    return dishRepository.getDishesInCart();
+  }
+
+  public LiveData<List<Dish>> getDishesInCartForRestaurant(int restaurant_id) {
+    return dishRepository.getDishesInCartForRestaurant(restaurant_id);
+  }
 }

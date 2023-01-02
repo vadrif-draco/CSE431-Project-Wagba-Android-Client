@@ -44,4 +44,7 @@
     <string name="ordersNavPrompt">Order History and Tracking</string>
     <string name="out_of_stock">OUT OF STOCK</string>
     <string name="add_this_dish_to_cart">Add this dish to cart</string>
+    <string name="cart">Cart</string>
+    <string name="cart_prompt">Manage your cart and proceed with payment</string>
+    <string name="orderPrompt">Order</string>
 </resources>

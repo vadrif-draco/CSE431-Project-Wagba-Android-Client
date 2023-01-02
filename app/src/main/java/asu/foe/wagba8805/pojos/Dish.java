@@ -31,7 +31,7 @@ public class Dish {
   public String name;
   public String description;
   public String imageUrl;
-  public int inCartQuantity = 0;
+  public int inCartQuantity;
 
   public Dish() {
   }
@@ -64,8 +64,12 @@ public class Dish {
     return imageUrl;
   }
 
+  public int getInCartQuantity() {
+    return inCartQuantity;
+  }
+
   @Ignore
-  public Dish(Integer id, Integer restaurant_id, Float price, Boolean available, String name, String description, String imageUrl) {
+  public Dish(Integer id, Integer restaurant_id, Float price, Boolean available, String name, String description, String imageUrl, int inCartQuantity) {
     this.id = id == null ? 0 : id;
     this.restaurant_id = restaurant_id == null ? 0 : restaurant_id;
     this.price = price;
@@ -73,5 +77,6 @@ public class Dish {
     this.name = name;
     this.description = description;
     this.imageUrl = imageUrl;
+    this.inCartQuantity = inCartQuantity;
   }
 }
