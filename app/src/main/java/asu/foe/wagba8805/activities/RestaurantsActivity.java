@@ -1,9 +1,13 @@
 package asu.foe.wagba8805.activities;
 
+import static asu.foe.wagba8805.Constants.TAG;
+
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,6 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import asu.foe.wagba8805.R;
 import asu.foe.wagba8805.databinding.RestaurantsBinding;
@@ -35,13 +46,28 @@ public class RestaurantsActivity extends AppCompatActivity {
 
     RecyclerView restaurantsRV = restaurantsBinding.restaurantsRV;
     RestaurantsItemListAdapter restaurantsAdapter = new RestaurantsItemListAdapter(this);
-    restaurantsAdapter.set(new RestaurantsItem[]{
-        new RestaurantsItem("Some restaurant", "Some address", "https://www.osiristours.com/wp-content/uploads/2018/03/Four-Seasons-Nile-Plaza-1-1024x720-1.jpg"),
-        new RestaurantsItem("Nagaf Restaurants", "91 Abbassia St., Abdo Pasha Sq.", "https://i.imgur.com/MIh5P37.jpeg"),
-        new RestaurantsItem("Some restaurant", "Some address", "some.image.url"),
-        new RestaurantsItem("Some restaurant", "Some address", "some.image.url"),
-        new RestaurantsItem("Some restaurant", "Some address", "some.image.url"),
+    restaurantsAdapter.set(new RestaurantsItem[0]);
+
+    // TODO: Find a better place for this
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("restaurants");
+    myRef.addValueEventListener(new ValueEventListener() {
+      @Override
+      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        ArrayList<RestaurantsItem> items = new ArrayList<>();
+        for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+          items.add(childSnapshot.getValue(RestaurantsItem.class));
+        }
+        restaurantsAdapter.set(items.toArray(new RestaurantsItem[0]));
+      }
+
+      @Override
+      public void onCancelled(@NonNull DatabaseError error) {
+        // Failed to read value
+        Log.w(TAG, "Failed to read value.", error.toException());
+      }
     });
+
     restaurantsRV.setAdapter(restaurantsAdapter);
     if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
       restaurantsRV.setLayoutManager(new GridLayoutManager(this, 2));
